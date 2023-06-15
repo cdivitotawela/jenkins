@@ -4,7 +4,7 @@ pipeline {
 
   triggers {
     // Build periodically for main branch
-    cron(env.BRANCH_NAME == 'main' ? '* * * * *')
+    cron(env.BRANCH_NAME == 'main' ? '* * * * *' : '')
   }
 
   stages {
