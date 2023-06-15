@@ -3,8 +3,8 @@ pipeline {
   agent any
 
   triggers {
-    when{ branch 'main' }
-    cron('* * * * *')
+    // Build periodically for main branch
+    cron(env.BRANCH_NAME == 'main' ? '* * * * *')
   }
 
   stages {
