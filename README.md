@@ -14,5 +14,24 @@ This repository contains docker based Jenkins setup for quick learning and exper
    docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
    ```
 
-4. Navigate to Jenkins console http://localhost:8080
+4. Jenkins console url http://localhost:8080
 
+## Periodic Trigger Multi-Branch Pipeline
+It is possible to trigger multi-branch pipeline periodically for specific branch. 
+```groovy
+pipeline {
+  agent any
+  triggers {
+    // Build periodically for main branch
+    cron(env.BRANCH_NAME == 'main' ? '* * * * *' : '')
+  }
+
+  stages {
+    stage('Message'){
+      steps {
+        echo "Trigger every minute"
+      }
+    }
+  }
+}
+```
