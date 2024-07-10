@@ -8,13 +8,8 @@ This repository contains docker based Jenkins setup for quick learning and exper
    ```shell
    docker-compose up -d --build
    ```
-3. If this is the first time starting Jenkins, retrieve the initial password
-   ```shell
-   
-   docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
-   ```
-
-4. Jenkins console url http://localhost:8080
+3. Jenkins console url http://localhost:8080
+4. Admin user `admin/adminPassword` is created as part of the init scripts
 
 ## Periodic Trigger Multi-Branch Pipeline
 It is possible to trigger multi-branch pipeline periodically for specific branch. 
@@ -35,3 +30,16 @@ pipeline {
   }
 }
 ```
+
+## Configuration
+
+Jenkins is configured at startup using the groovy scripts in the [init.groovy.d](./init.groovy.d) folder. These scripts are
+mounted to the /usr/share/jenkins/ref/init.groovy.d of the Jenkins container which are executed when the 
+/usr/share/jenkins/jenkins.sh script runs at start. 
+
+| Script                   | Purpose                                   |
+|--------------------------|-------------------------------------------|
+| `createAdminUser.groovy` | Creating admin user for the Jenkins       |
+
+Also Jenkins system properties can be controlled by setting environment variable `JENKINS_JAVA_OPTS`. There are number of 
+parameters which can be used to control the system. These are documented at https://www.jenkins.io/doc/book/managing/system-properties/

@@ -28,9 +28,11 @@ services:
       DOCKER_HOST: tcp://docker:2376
       DOCKER_CERT_PATH: /certs/client
       DOCKER_TLS_VERIFY: 1
+      JENKINS_JAVA_OPTS: "-Djenkins.install.runSetupWizard=false"
     volumes:
       - jenkins-data:/var/jenkins_home
       - jenkins-docker-certs:/certs/client:ro
+      - $PWD/init.groovy.d:/usr/share/jenkins/ref/init.groovy.d
 
 volumes:
   jenkins-data:
