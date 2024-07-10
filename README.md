@@ -37,9 +37,11 @@ Jenkins is configured at startup using the groovy scripts in the [init.groovy.d]
 mounted to the /usr/share/jenkins/ref/init.groovy.d of the Jenkins container which are executed when the 
 /usr/share/jenkins/jenkins.sh script runs at start. 
 
-| Script                   | Purpose                                   |
-|--------------------------|-------------------------------------------|
-| `createAdminUser.groovy` | Creating admin user for the Jenkins       |
+| Script                                 | Purpose                                                     |
+|----------------------------------------|-------------------------------------------------------------|
+| `createAdminUser.groovy`               | Creating admin user for the Jenkins                         |
+| `configureTrustedGlobalLibrary.groovy` | Configure trusted global libary pointing to this repository | 
 
 Also Jenkins system properties can be controlled by setting environment variable `JENKINS_JAVA_OPTS`. There are number of 
-parameters which can be used to control the system. These are documented at https://www.jenkins.io/doc/book/managing/system-properties/
+parameters which can be used to control the system. These are documented at https://www.jenkins.io/doc/book/managing/system-properties/ System parameter `-Djenkins.install.runSetupWizard=false` is used to disable the setup wizard during
+initial start.
